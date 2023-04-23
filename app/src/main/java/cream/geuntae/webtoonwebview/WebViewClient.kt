@@ -9,7 +9,7 @@ import android.webkit.WebViewClient
 import android.widget.ProgressBar
 import androidx.core.view.isVisible
 
-class WebtoonWebViewClient(
+class WebViewClient(
     private val progressBar: ProgressBar,
     private val saveData: (String) -> Unit,
 ) : WebViewClient() {
