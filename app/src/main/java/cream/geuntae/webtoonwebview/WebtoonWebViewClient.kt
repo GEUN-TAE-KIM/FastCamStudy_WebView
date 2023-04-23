@@ -9,16 +9,20 @@ import android.webkit.WebViewClient
 import android.widget.ProgressBar
 import androidx.core.view.isVisible
 
-class WebtoonWebViewClient(private val progressBar: ProgressBar) : WebViewClient() {
+class WebtoonWebViewClient(
+    private val progressBar: ProgressBar,
+    private val saveData: (String) -> Unit,
+) : WebViewClient() {
 
     // 웹뷰를 true면 안 보여줄지 하는거
     // 한마디로 해당 값에서 다른페이지를 못가게 막는거
-    /*override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
+    override fun shouldOverrideUrlLoading(view: WebView?, request: WebResourceRequest?): Boolean {
 
-        if (request != null && request.url.toString().contains("comic.naver.com"))
-            return false
-        else return true
-    }*/
+        if (request != null && request.url.toString().contains("comic.naver.com/webtoon/detail")) {
+            saveData(request.url.toString())
+        }
+        return super.shouldOverrideUrlLoading(view, request)
+    }
 
     override fun onPageFinished(view: WebView?, url: String?) {
         super.onPageFinished(view, url)
